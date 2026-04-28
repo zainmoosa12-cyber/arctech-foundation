@@ -44,17 +44,16 @@ function ContactPage() {
   const validateStep = () => {
     const fields: (keyof FormState)[][] = [["service", "propertyType"], ["name", "email", "phone"], ["location", "message"]];
     const stepFields = fields[step];
-    const partial = stepFields.reduce((acc, f) => ({ ...acc, [f]: data[f] }), {} as Partial<FormState>);
-    const stepSchema = schema.pick(Object.fromEntries(stepFields.map((f) => [f, true])) as any);
-    const result = stepSchema.safeParse(partial);
+    const result = schema.safeParse(data);
+    const e: Partial<Record<keyof FormState, string>> = {};
     if (!result.success) {
-      const e: Partial<Record<keyof FormState, string>> = {};
-      result.error.issues.forEach((i) => { e[i.path[0] as keyof FormState] = i.message; });
-      setErrors(e);
-      return false;
+      result.error.issues.forEach((i) => {
+        const k = i.path[0] as keyof FormState;
+        if (stepFields.includes(k)) e[k] = i.message;
+      });
     }
-    setErrors({});
-    return true;
+    setErrors(e);
+    return Object.keys(e).length === 0;
   };
 
   const next = () => { if (validateStep()) setStep((s) => Math.min(s + 1, 2)); };
