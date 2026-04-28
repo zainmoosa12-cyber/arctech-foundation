@@ -58,8 +58,8 @@ export default function Footer() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-6 flex flex-col md:flex-row justify-between gap-3 text-xs text-muted-foreground">
           <div>© {new Date().getFullYear()} Arctech Construction (Pty) Ltd. All rights reserved.</div>
           <div className="flex gap-4">
-            <Link to="/privacy" className="hover:text-primary">Privacy Policy</Link>
-            <Link to="/terms" className="hover:text-primary">Terms & Conditions</Link>
+            <a href="/privacy" className="hover:text-primary">Privacy Policy</a>
+            <a href="/terms" className="hover:text-primary">Terms & Conditions</a>
           </div>
         </div>
       </div>

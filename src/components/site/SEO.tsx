@@ -1,4 +1,4 @@
-type Meta = { name?: string; property?: string; content: string; title?: string };
+type Meta = { name?: string; property?: string; content?: string; title?: string };
 
 export function buildMeta(opts: {
   title: string;
