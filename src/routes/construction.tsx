@@ -23,7 +23,7 @@ const process = [
   { step: "04", title: "Handover", desc: "Snag-free delivery with full documentation." },
 ];
 
-export default function ConstructionPage() {
+function ConstructionPage() {
   useSEO(buildMeta({
     title: "Arctech Construction — Residential, Commercial & Public Builds",
     description: "End-to-end construction across residential, commercial, industrial and government infrastructure. CIDB & NHBRC registered.",
