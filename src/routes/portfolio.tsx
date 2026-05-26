@@ -1,9 +1,8 @@
-import { createFileRoute } from "@tanstack/react-router";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import { X, MapPin, Calendar, Tag } from "lucide-react";
 import { FadeUp, SectionHeading } from "../components/site/Section";
-import { buildMeta } from "../components/site/SEO";
+import { buildMeta, useSEO } from "../components/site/SEO";
 import imgRefurb from "../assets/service-refurb.jpg";
 import imgPainting from "../assets/service-painting.jpg";
 import imgElectrical from "../assets/service-electrical.jpg";
@@ -13,14 +12,7 @@ import imgTenant from "../assets/service-tenant.jpg";
 import imgConstruction from "../assets/construction-hero.jpg";
 import imgGeneral from "../assets/service-general.jpg";
 
-export const Route = createFileRoute("/portfolio")({
-  head: () => buildMeta({
-    title: "Portfolio — Recent Projects | Arctechworx",
-    description: "Selected refurbishment, maintenance and construction projects across Johannesburg.",
-    path: "/portfolio",
-  }),
-  component: PortfolioPage,
-});
+
 
 type Project = {
   id: string;
@@ -46,6 +38,11 @@ const projects: Project[] = [
 const filters = ["All", "Refurbishment", "Maintenance", "Construction", "Tenant Prep"] as const;
 
 function PortfolioPage() {
+  useSEO(buildMeta({
+    title: "Portfolio — Recent Projects | Arctechworx",
+    description: "Selected refurbishment, maintenance and construction projects across Johannesburg.",
+    path: "/portfolio",
+  }));
   const [filter, setFilter] = useState<(typeof filters)[number]>("All");
   const [active, setActive] = useState<Project | null>(null);
 
@@ -161,3 +158,5 @@ function PortfolioPage() {
     </div>
   );
 }
+
+export default PortfolioPage;

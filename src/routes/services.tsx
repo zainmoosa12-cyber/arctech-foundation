@@ -1,8 +1,8 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Wrench, Zap, Droplets, Paintbrush, Hammer, Sparkles, KeyRound, Layers, ArrowRight, CheckCircle2 } from "lucide-react";
 import { FadeUp, SectionHeading } from "../components/site/Section";
-import { buildMeta } from "../components/site/SEO";
+import { buildMeta, useSEO } from "../components/site/SEO";
 import imgElectrical from "../assets/service-electrical.jpg";
 import imgPlumbing from "../assets/service-plumbing.jpg";
 import imgPainting from "../assets/service-painting.jpg";
@@ -12,14 +12,7 @@ import imgTenant from "../assets/service-tenant.jpg";
 import imgCleaning from "../assets/service-cleaning.jpg";
 import imgRefurb from "../assets/service-refurb.jpg";
 
-export const Route = createFileRoute("/services")({
-  head: () => buildMeta({
-    title: "Services — Property Maintenance & Refurbishment | Arctechworx",
-    description: "Electrical, plumbing, painting, flooring, refurbishment, tenant prep & professional cleaning across Johannesburg. Certified, compliant, on time.",
-    path: "/services",
-  }),
-  component: ServicesPage,
-});
+
 
 const services = [
   { icon: Zap, image: imgElectrical, title: "Electrical Services", points: ["Certified electricians", "DB boards & wiring", "Lighting & power", "Compliance certificates (CoC)"] },
@@ -33,6 +26,11 @@ const services = [
 ];
 
 function ServicesPage() {
+  useSEO(buildMeta({
+    title: "Services — Property Maintenance & Refurbishment | Arctechworx",
+    description: "Electrical, plumbing, painting, flooring, refurbishment, tenant prep & professional cleaning across Johannesburg. Certified, compliant, on time.",
+    path: "/services",
+  }));
   return (
     <div className="pt-20">
       <section className="relative py-20 md:py-28 grid-pattern border-b border-border">
@@ -99,3 +97,5 @@ function ServicesPage() {
     </div>
   );
 }
+
+export default ServicesPage;

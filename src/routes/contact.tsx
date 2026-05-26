@@ -1,19 +1,11 @@
-import { createFileRoute } from "@tanstack/react-router";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import { z } from "zod";
 import { Phone, Mail, MapPin, MessageCircle, ArrowRight, ArrowLeft, CheckCircle2, Loader2 } from "lucide-react";
 import { FadeUp, SectionHeading } from "../components/site/Section";
-import { buildMeta } from "../components/site/SEO";
+import { buildMeta, useSEO } from "../components/site/SEO";
 
-export const Route = createFileRoute("/contact")({
-  head: () => buildMeta({
-    title: "Contact — Request a Quote | Arctechworx Johannesburg",
-    description: "Request a free property maintenance or construction quote. Based in Fourways, Johannesburg. WhatsApp, call or email — we respond within one business day.",
-    path: "/contact",
-  }),
-  component: ContactPage,
-});
+
 
 const FORMSPREE_ENDPOINT = "https://formspree.io/f/xpwagqkv";
 
@@ -33,6 +25,11 @@ const propertyTypes = ["Residential", "Commercial", "Industrial", "Government / 
 type FormState = z.infer<typeof schema>;
 
 function ContactPage() {
+  useSEO(buildMeta({
+    title: "Contact — Request a Quote | Arctechworx Johannesburg",
+    description: "Request a free property maintenance or construction quote. Based in Fourways, Johannesburg. WhatsApp, call or email — we respond within one business day.",
+    path: "/contact",
+  }));
   const [step, setStep] = useState(0);
   const [data, setData] = useState<FormState>({ service: "", propertyType: "", name: "", email: "", phone: "", location: "", message: "" });
   const [errors, setErrors] = useState<Partial<Record<keyof FormState, string>>>({});
@@ -297,3 +294,5 @@ function Select({ value, onChange, options, placeholder }: { value: string; onCh
     </select>
   );
 }
+
+export default ContactPage;

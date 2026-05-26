@@ -1,4 +1,4 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import {
   Wrench, Zap, Droplets, Paintbrush, Hammer, Home, Sparkles, KeyRound,
@@ -8,17 +8,9 @@ import {
 import heroImg from "../assets/hero-construction.jpg";
 import { FadeUp, SectionHeading } from "../components/site/Section";
 import { CountUp } from "../components/site/CountUp";
-import { buildMeta } from "../components/site/SEO";
+import { buildMeta, useSEO } from "../components/site/SEO";
 
-export const Route = createFileRoute("/")({
-  head: () => buildMeta({
-    title: "Arctechworx — Property Maintenance & Construction | Johannesburg",
-    description: "Johannesburg's trusted property maintenance, refurbishment and construction specialists. B-BBEE Level 1. CIDB, NHBRC & SARS registered.",
-    path: "/",
-    image: "https://arctechworx.co.za/og.jpg",
-  }),
-  component: Index,
-});
+
 
 const worxServices = [
   { icon: Wrench, title: "Property Maintenance & Refurbishment", desc: "Scheduled maintenance and full refurbishments." },
@@ -69,6 +61,12 @@ function Card({ icon: Icon, title, desc }: { icon: any; title: string; desc?: st
 }
 
 function Index() {
+  useSEO(buildMeta({
+    title: "Arctechworx — Property Maintenance & Construction | Johannesburg",
+    description: "Johannesburg's trusted property maintenance, refurbishment and construction specialists. B-BBEE Level 1. CIDB, NHBRC & SARS registered.",
+    path: "/",
+    image: "https://arctechworx.co.za/og.jpg",
+  }));
   return (
     <div>
       {/* HERO */}
@@ -298,3 +296,5 @@ function Index() {
     </div>
   );
 }
+
+export default Index;
