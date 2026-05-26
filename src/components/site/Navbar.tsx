@@ -1,4 +1,4 @@
-import { Link } from "@tanstack/react-router";
+import { Link, NavLink } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { Menu, X, Receipt } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -40,15 +40,18 @@ export default function Navbar() {
 
         <div className="hidden lg:flex items-center gap-8">
           {links.map((l) => (
-            <Link
+            <NavLink
               key={l.to}
               to={l.to}
-              className="text-sm tracking-wide text-muted-foreground hover:text-foreground transition-colors"
-              activeProps={{ className: "text-primary" }}
-              activeOptions={{ exact: l.to === "/" }}
+              end={l.to === "/"}
+              className={({ isActive }) =>
+                `text-sm tracking-wide transition-colors ${
+                  isActive ? "text-primary" : "text-muted-foreground hover:text-foreground"
+                }`
+              }
             >
               {l.label}
-            </Link>
+            </NavLink>
           ))}
         </div>
 

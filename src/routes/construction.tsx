@@ -1,19 +1,11 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Building2, Landmark, ClipboardList, ShieldCheck, Target, Eye, Award, ArrowRight, CheckCircle2 } from "lucide-react";
 import { FadeUp, SectionHeading } from "../components/site/Section";
-import { buildMeta } from "../components/site/SEO";
+import { buildMeta, useSEO } from "../components/site/SEO";
 import heroImg from "../assets/construction-hero.jpg";
 
-export const Route = createFileRoute("/construction")({
-  head: () => buildMeta({
-    title: "Arctech Construction — Residential, Commercial & Public Builds",
-    description: "End-to-end construction across residential, commercial, industrial and government infrastructure. CIDB & NHBRC registered.",
-    path: "/construction",
-    image: "https://arctechworx.co.za/og-construction.jpg",
-  }),
-  component: ConstructionPage,
-});
+
 
 const capabilities = [
   { icon: Building2, title: "Residential Construction", desc: "New homes, extensions, and full builds delivered to spec." },
@@ -31,7 +23,13 @@ const process = [
   { step: "04", title: "Handover", desc: "Snag-free delivery with full documentation." },
 ];
 
-export default function ConstructionPage() {
+function ConstructionPage() {
+  useSEO(buildMeta({
+    title: "Arctech Construction — Residential, Commercial & Public Builds",
+    description: "End-to-end construction across residential, commercial, industrial and government infrastructure. CIDB & NHBRC registered.",
+    path: "/construction",
+    image: "https://arctechworx.co.za/og-construction.jpg",
+  }));
   return (
     <div>
       {/* HERO */}
@@ -160,3 +158,5 @@ export default function ConstructionPage() {
     </div>
   );
 }
+
+export default ConstructionPage;

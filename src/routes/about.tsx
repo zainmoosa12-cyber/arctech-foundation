@@ -1,17 +1,10 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ShieldCheck, Award, Users, Target, Eye, Heart, ArrowRight, CheckCircle2 } from "lucide-react";
 import { FadeUp, SectionHeading } from "../components/site/Section";
-import { buildMeta } from "../components/site/SEO";
+import { buildMeta, useSEO } from "../components/site/SEO";
 
-export const Route = createFileRoute("/about")({
-  head: () => buildMeta({
-    title: "About — 100% Black-Owned Property & Construction | Arctechworx",
-    description: "Arctech Construction (Pty) Ltd — a 100% Black-owned, B-BBEE Level 1 property maintenance and construction company based in Fourways, Johannesburg.",
-    path: "/about",
-  }),
-  component: AboutPage,
-});
+
 
 const values = [
   { icon: ShieldCheck, title: "Integrity", desc: "Honest quotes, honest timelines, honest workmanship." },
@@ -30,6 +23,11 @@ const compliance = [
 ];
 
 function AboutPage() {
+  useSEO(buildMeta({
+    title: "About — 100% Black-Owned Property & Construction | Arctechworx",
+    description: "Arctech Construction (Pty) Ltd — a 100% Black-owned, B-BBEE Level 1 property maintenance and construction company based in Fourways, Johannesburg.",
+    path: "/about",
+  }));
   return (
     <div className="pt-20">
       {/* HERO */}
@@ -165,3 +163,5 @@ function AboutPage() {
     </div>
   );
 }
+
+export default AboutPage;
